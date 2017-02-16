@@ -4,14 +4,18 @@ var sequelize = new Sequelize('postgres://rishabsaxena:@localhost:5432/moviedata
 var getparaMount = () => axios.get(' https://movie-api-lyalzcwvbg.now.sh/paramount');
 var getDreamWorks = () => axios.get(' https://movie-api-lyalzcwvbg.now.sh/dreamWorks');
 var getActors = () => axios.get('https://movie-api-lyalzcwvbg.now.sh/actors');  
-//var movies = [];
-function moviedb()
-{
+var movies = [];
     getparaMount()
   .then(function (response) {
-    //console.log('called') 
-      const addMovie = addMovie(response.data,'paramount');
-      addMovie.then(()=>{});
+      forEach(function (element)
+    {
+        const movieName = element.movieName;
+        const studioName = studio;
+        const releaseDate = element.releaseDate;
+        const query = `insert into movies moviename,releasedate,studio values ${movieName},${releaseDate},${studioName}`;
+        const readTasks = sequelize.query(query);
+        return readTasks;
+    });
   })
   .catch(function (error) {
       console.log(error);
@@ -74,7 +78,7 @@ function addMovieActors(movieActorData)
 
 function getMovie(moviename)
 {
-    const query = `select moviename,releasedate,studio from movies where movie=${moviename}`;
+    const query = 'select moviename,releasedate,studio from movies';
     const getMovies = sequelize.query(query);
     return getMovies;
 }
